@@ -16,7 +16,7 @@ usage="
 	  * Output columns are: 
 	    1) input_file 
 	    2) fasta_entry_header 
-	    3) fastq_entry_length 
+	    3) fasta_entry_length 
 	    4) start_coordinate 
 	    5) end_coordinate
 

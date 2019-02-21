@@ -20,7 +20,6 @@ usage="
 	    4) start_coordinate 
 	    5) end_coordinate
 
-
 	Options:
 		--help / -h 	show this help text
 		"

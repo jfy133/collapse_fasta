@@ -1,10 +1,10 @@
 # collapse_fastas
 
 ## Description
-A small bash script that combines multiple (multi-)FASTA files into a single FASTA file with a single header. 
+A small bash script that uses `awk` and `sed` to combine multiple (multi-)FASTA files into a single FASTA file with a single header. 
 Coordinates of the original FASTA entries in the new file are are recorded in a 'coords' file.
 
-It uses awk and sed, tested on Ubuntu 14.04 with GNU `bash` 4.3.11(1)-release, GNU `awk` 4.0.1, GNU `sed` 4.2.2
+Tested on Ubuntu 14.04 with GNU `bash` 4.3.11(1)-release, GNU `awk` 4.0.1, GNU `sed` 4.2.2
 
 ## Usage
 ```

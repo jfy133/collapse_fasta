@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## Author: James A. Fellows Yates (jfy133[at]gmail.com)
+## Date: February 2019
+
 usage="
 	Usage: 
 	collapse_fasta.sh <output_name> /<path_to/<output_dir>/ /<path_to>/<fasta_1>.fa /<path_to>/<fasta_2>.fa [...]

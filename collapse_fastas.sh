@@ -147,7 +147,7 @@ awk '/>/&&c++>0 {
 	print n $0; n = "" 
 } END { 
 	printf "%s", n 
-}' | fold -w 80 > "$out_dir"/collapsed_"$name".fa
+}' > "$out_dir"/collapsed_"$name".fa
 sed -i "s/>.*/>$name/g" "$out_dir"/collapsed_"$name".fa
 
 #echo "...cleaning up..."

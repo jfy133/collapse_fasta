@@ -6,6 +6,7 @@ Coordinates of the original FASTA entries in the new file are are recorded in a 
 
 It uses awk and sed, tested on Ubuntu 14.04 with GNU `bash` 4.3.11(1)-release, GNU `awk` 4.0.1, GNU `sed` 4.2.2
 
+## Usage
 ```
 Usage: 
 collapse_fasta.sh <output_name> /<path_to/<output_dir>/ /<path_to>/<fasta_1>.fa /<path_to>/<fasta_2>.fa [...]

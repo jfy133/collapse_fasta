@@ -1,9 +1,0 @@
-test_data/test_data1.fa	test_data1_A	10	1	10
-test_data/test_data1.fa	test_data1_B	10	11	20
-test_data/test_data1.fa	test_data1_C	10	21	30
-test_data/test_data2.fa	test_data2_A	12	31	42
-test_data/test_data2.fa	test_data2_B	12	43	54
-test_data/test_data2.fa	test_data2_C	12	55	66
-test_data/test_data3.fa.gz	test_data3_A	10	67	76
-test_data/test_data3.fa.gz	test_data3_B	12	77	88
-test_data/test_data3.fa.gz	test_data3_C	14	89	102

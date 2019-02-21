@@ -35,32 +35,17 @@ elif [[ "$1" == "--help" ]]; then
 	echo "$usage"
 	exit 0
 elif [[ $# -le 1 ]]; then
-	echo "
-	Error: Incorrect input arguments! 
-
-	$usage"
-	exit 1
-elif [[ -d $1 ]]; then
-	echo "
-	Error: Incorrect input arguments! 
-
-	$usage"
+	echo "$usage"
 	exit 1
 elif [[ -f $1 ]]; then
 	echo "
-	Error: Incorrect input arguments! 
-
-	$usage"
-	exit 1
-elif [[ -f $2 ]]; then
-	echo "
-	Error: Incorrect input arguments! 
+	Error: Incorrect input arguments, first argument should be name not file! 
 
 	$usage"
 	exit 1
 elif [[ ! -d $2 ]]; then
 	echo "
-	Error: Incorrect input arguments! 
+	Error: Incorrect input arguments, second argument should be directory not file! 
 
 	$usage"
 	exit 1

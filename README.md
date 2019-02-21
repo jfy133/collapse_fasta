@@ -35,3 +35,6 @@ Notes:
 
 ## Example Output 
 Can be seen under `test_data/collapsed_Test1.fa` and `collapsed_Test1.coords`
+
+## License
+MIT

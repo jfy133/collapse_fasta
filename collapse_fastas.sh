@@ -74,26 +74,26 @@ file_array=("${file_array[@]:2}")
 ## Removing old files
 #echo "...[If run previously] removing old temporary files..."
 
-if [[ -f "$out_dir"/temp_combined_"$name".coords ]]; then
-	rm "$out_dir"/temp_combined_"$name".coords
+if [[ -f "$out_dir"/temp_collapsed_"$name".coords ]]; then
+	rm "$out_dir"/temp_collapsed_"$name".coords
 fi
 
-if [[ -f "$out_dir"/temp_combined_"$name".fa ]]; then
-	rm "$out_dir"/temp_combined_"$name".fa
+if [[ -f "$out_dir"/temp_collapsed_"$name".fa ]]; then
+	rm "$out_dir"/temp_collapsed_"$name".fa
 fi
 
-if [[ -f "$out_dir"/combined_"$name".fa ]]; then
+if [[ -f "$out_dir"/collapsed_"$name".fa ]]; then
 	echo "
-	Error: $out_dir/combined_$name.fa already exists!
+	Error: $out_dir/collapsed_$name.fa already exists!
 
 	Please remove the old file or provide a new output name.
 	"
 	exit 1
 fi
 
-if [[ -f "$out_dir"/combined_"$name".coords ]]; then
+if [[ -f "$out_dir"/collapsed_"$name".coords ]]; then
 	echo "
-	Error: $out_dir/combined_$name.coords already exists!
+	Error: $out_dir/collapsed_$name.coords already exists!
 
 	Please remove the old file or provide a new output name.
 	"
@@ -106,7 +106,7 @@ fi
 ## Combine fastas into a single file (currently with headers)
 ## awk oneliner: https://www.danielecook.com/generate-fasta-sequence-lengths/
 
-#echo "...generating contig coordinates and generating combined FASTA..."
+#echo "...generating contig coordinates and generating collapsed FASTA..."
 
 for i in "${file_array[@]}"; do
 	file_name="$i"
@@ -118,28 +118,28 @@ for i in "${file_array[@]}"; do
 			c+=length($0);
 		} END {
 			print c; 
-		}' <(zcat "$i") >> "$out_dir"/temp_combined_"$name".coords
-		zcat "$i" >> "$out_dir"/temp_combined_"$name".fa
+		}' <(zcat "$i") >> "$out_dir"/temp_collapsed_"$name".coords
+		zcat "$i" >> "$out_dir"/temp_collapsed_"$name".fa
 	else
 		awk -v file_name="$file_name" \
 		'$0 ~ /^>/ {
 			print c; c=0;printf file_name "\t" substr($0,2) "\t"; 
 		} $0 !~ ">" {c+=length($0);} END {
 			print c; 
-		}' "$i" >> "$out_dir"/temp_combined_"$name".coords
-		cat "$i" >> "$out_dir"/temp_combined_"$name".fa
+		}' "$i" >> "$out_dir"/temp_collapsed_"$name".coords
+		cat "$i" >> "$out_dir"/temp_collapsed_"$name".fa
 	fi
 done
 
 ## Clean empty lines
-sed -i '/^$/d' "$out_dir"/temp_combined_"$name".coords
+sed -i '/^$/d' "$out_dir"/temp_collapsed_"$name".coords
 
-if [[ ! -f "$out_dir"/temp_combined_"$name".coords ]]; then
+if [[ ! -f "$out_dir"/temp_collapsed_"$name".coords ]]; then
 	echo "Oops... something went wrong..."
 	exit 1
 fi
 
-if [[ ! -f "$out_dir"/temp_combined_"$name".fa ]]; then
+if [[ ! -f "$out_dir"/temp_collapsed_"$name".fa ]]; then
 	echo "Oops... something went wrong..."
 	exit 1
 fi
@@ -147,26 +147,26 @@ fi
 #echo "...calculating new FASTA coordinates..."
 
 awk -F '\t' '{sum += $3; start=(sum-$3)+1} {print $0"\t"start"\t"sum}' \
-"$out_dir"/temp_combined_"$name".coords > "$out_dir"/combined_"$name".coords
+"$out_dir"/temp_collapsed_"$name".coords > "$out_dir"/collapsed_"$name".coords
 
 #echo "...stripping FASTA headers..."
 
 ## From: https://www.unix.com/302533338-post2.html
 awk '/>/&&c++>0 {
 	next
-} 1 ' "$out_dir"/temp_combined_"$name".fa | awk '!/^>/ { 
+} 1 ' "$out_dir"/temp_collapsed_"$name".fa | awk '!/^>/ { 
 	printf "%s", $0; n = "\n" 
 } /^>/ { 
 	print n $0; n = "" 
 } END { 
 	printf "%s", n 
-}' | fold -w 80 > "$out_dir"/combined_"$name".fa
-sed -i "s/>.*/>$name/g" "$out_dir"/combined_"$name".fa
+}' | fold -w 80 > "$out_dir"/collapsed_"$name".fa
+sed -i "s/>.*/>$name/g" "$out_dir"/collapsed_"$name".fa
 
 #echo "...cleaning up..."
 
-rm "$out_dir"/temp_combined_"$name".coords
-rm "$out_dir"/temp_combined_"$name".fa
+rm "$out_dir"/temp_collapsed_"$name".coords
+rm "$out_dir"/temp_collapsed_"$name".fa
 
 #echo "...Done!"
 

@@ -3,6 +3,7 @@
   * [Description](#description)
   * [Usage](#usage)
   * [Example Output](#example-output)
+  * [License](#license)
 
 ## Description
 A small bash script that uses `awk` and `sed` to combine multiple (multi-)FASTA files into a single FASTA file with a single header. 

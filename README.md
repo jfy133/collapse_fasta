@@ -1,5 +1,10 @@
 # collapse_fastas
 
+  * [Description](#description)
+  * [Usage](#usage)
+  * [Example Output](#example-output)
+  * [License](#license)
+
 ## Description
 A small bash script that uses `awk` and `sed` to combine multiple (multi-)FASTA files into a single FASTA file with a single header. 
 Coordinates of the original FASTA entries in the new file are are recorded in a `.coords` and a `.bed` file. 

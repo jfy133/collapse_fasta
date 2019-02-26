@@ -1,0 +1,9 @@
+Test_superreference	0	10	test_data/test_data1.fa test_data1_A
+Test_superreference	10	20	test_data/test_data1.fa test_data1_B
+Test_superreference	20	30	test_data/test_data1.fa test_data1_C
+Test_superreference	30	42	test_data/test_data2.fa test_data2_A
+Test_superreference	42	54	test_data/test_data2.fa test_data2_B
+Test_superreference	54	66	test_data/test_data2.fa test_data2_C
+Test_superreference	66	76	test_data/test_data3.fa.gz test_data3_A
+Test_superreference	76	88	test_data/test_data3.fa.gz test_data3_B
+Test_superreference	88	102	test_data/test_data3.fa.gz test_data3_C

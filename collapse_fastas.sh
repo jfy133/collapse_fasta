@@ -133,7 +133,11 @@ fi
 
 #echo "...calculating new FASTA coordinates..."
 
-awk -F '\t' '{sum += $3; start=(sum-$3)+1} {print $0"\t"start"\t"sum}' \
+awk -F '\t' '{
+	sum += $3; start=(sum-$3)+1
+} {
+	print $0"\t"start"\t"sum
+}' \
 "$out_dir"/temp_collapsed_"$name".coords > "$out_dir"/collapsed_"$name".coords
 
 #echo "...stripping FASTA headers..."
@@ -149,6 +153,17 @@ awk '/>/&&c++>0 {
 	printf "%s", n 
 }' > "$out_dir"/collapsed_"$name".fa
 sed -i "s/>.*/>$name/g" "$out_dir"/collapsed_"$name".fa
+
+#echo "...making bed file..."
+## Note I follow the bedtools specification: 
+## https://bedtools.readthedocs.io/en/latest/content/general-usage.html#bed-format
+## because it is inconsistent across different places and that was best 
+## described 
+awk -F '\t' -v header="$name" '{
+	bed_start=$4-1
+} {
+	print header"\t"bed_start"\t"$5"\t"$1" "$2
+}' "$out_dir"/collapsed_"$name".coords > "$out_dir"/collapsed_"$name".bed
 
 #echo "...cleaning up..."
 
